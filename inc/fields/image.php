@@ -133,4 +133,24 @@ class RWMB_Image_Field extends RWMB_File_Field {
 
 		return $info;
 	}
+
+	/**
+	 * Get uploaded file information.
+	 *
+	 * @param array $file Attachment image ID (post ID). Required.
+	 * @param array $args Array of arguments (for size).
+	 *
+	 * @return array|bool False if file not found. Array of image info on success.
+	 */
+	public static function array_file_info( $file, $args = array() ) {
+		$args       = wp_parse_args( $args, array(
+			'size' => 'thumbnail',
+		) );
+		foreach( $file as $image_id ){
+            $info = self::file_info( $image_id, $args );
+			$array_info[] = $info;
+			
+        }
+		return $array_info;
+	}
 }
